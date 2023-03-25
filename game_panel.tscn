@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5kw7dvk505fj"]
+
+[ext_resource type="Script" path="res://src/game_panel.gd" id="1_f3nio"]
+[ext_resource type="Theme" uid="uid://ds7tnirh5ged8" path="res://res/theme_smaller.tres" id="2_caws8"]
+[ext_resource type="Script" path="res://src/name_input.gd" id="3_7jbdy"]
+[ext_resource type="Theme" uid="uid://bc8lcjrrywtn3" path="res://res/theme.tres" id="4_5y7gq"]
+
+[node name="game_panel" type="PanelContainer"]
+script = ExtResource("1_f3nio")
+
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="top_status" type="Label" parent="vbox"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_caws8")
+horizontal_alignment = 1
+
+[node name="name_input" type="HBoxContainer" parent="vbox"]
+layout_mode = 2
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+alignment = 1
+script = ExtResource("3_7jbdy")
+
+[node name="ok" type="Button" parent="vbox"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_5y7gq")
+text = "ok"
+
+[connection signal="done" from="vbox/name_input" to="." method="_on_name_input_done"]

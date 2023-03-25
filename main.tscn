@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://mk2k5jilyc14"]
+
+[ext_resource type="Texture2D" uid="uid://bkm5pwmm54y2s" path="res://res/img/bg.png" id="2_bowx7"]
+[ext_resource type="Theme" uid="uid://bc8lcjrrywtn3" path="res://res/theme.tres" id="4_hhm3g"]
+[ext_resource type="Theme" uid="uid://ds7tnirh5ged8" path="res://res/theme_smaller.tres" id="4_nu8og"]
+[ext_resource type="Script" path="res://src/menu.gd" id="4_p1rda"]
+[ext_resource type="Script" path="res://src/leaderboard.gd" id="5_mvdsp"]
+[ext_resource type="Script" path="res://src/game_panels.gd" id="6_44www"]
+
+[node name="main" type="Node2D"]
+
+[node name="topleft" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="menu" type="CenterContainer" parent="topleft"]
+layout_mode = 0
+script = ExtResource("4_p1rda")
+
+[node name="bg" type="Control" parent="topleft/menu"]
+layout_mode = 2
+
+[node name="img" type="Sprite2D" parent="topleft/menu/bg"]
+texture = ExtResource("2_bowx7")
+
+[node name="main_menu" type="VBoxContainer" parent="topleft/menu"]
+layout_mode = 2
+
+[node name="game_select" type="OptionButton" parent="topleft/menu/main_menu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../exit")
+focus_neighbor_bottom = NodePath("../play")
+theme = ExtResource("4_nu8og")
+
+[node name="play" type="Button" parent="topleft/menu/main_menu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../game_select")
+focus_neighbor_bottom = NodePath("../leaderboard")
+theme = ExtResource("4_hhm3g")
+text = "play"
+
+[node name="leaderboard" type="Button" parent="topleft/menu/main_menu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../play")
+focus_neighbor_bottom = NodePath("../exit")
+theme = ExtResource("4_hhm3g")
+text = "leaderboard"
+
+[node name="exit" type="Button" parent="topleft/menu/main_menu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../leaderboard")
+focus_neighbor_bottom = NodePath("../play")
+theme = ExtResource("4_hhm3g")
+text = "exit"
+
+[node name="leaderboard" type="VBoxContainer" parent="topleft/menu"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_mvdsp")
+
+[node name="panel" type="PanelContainer" parent="topleft/menu/leaderboard"]
+layout_mode = 2
+
+[node name="hor" type="HBoxContainer" parent="topleft/menu/leaderboard/panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="list_names" type="VBoxContainer" parent="topleft/menu/leaderboard/panel/hor"]
+layout_mode = 2
+alignment = 2
+
+[node name="list_seps" type="VBoxContainer" parent="topleft/menu/leaderboard/panel/hor"]
+layout_mode = 2
+alignment = 1
+
+[node name="list_scores" type="VBoxContainer" parent="topleft/menu/leaderboard/panel/hor"]
+layout_mode = 2
+
+[node name="back" type="Button" parent="topleft/menu/leaderboard"]
+layout_mode = 2
+theme = ExtResource("4_hhm3g")
+text = "back"
+
+[node name="game_panels" type="HBoxContainer" parent="topleft/menu"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_44www")
+
+[connection signal="item_selected" from="topleft/menu/main_menu/game_select" to="topleft/menu" method="_on_game_select_item_selected"]
+[connection signal="pressed" from="topleft/menu/main_menu/play" to="topleft/menu" method="_on_play_pressed"]
+[connection signal="pressed" from="topleft/menu/main_menu/leaderboard" to="topleft/menu" method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="topleft/menu/main_menu/exit" to="topleft/menu" method="_on_exit_pressed"]
+[connection signal="pressed" from="topleft/menu/leaderboard/back" to="topleft/menu/leaderboard" method="_on_back_pressed" flags=18]

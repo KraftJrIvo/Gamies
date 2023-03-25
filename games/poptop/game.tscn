@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwmhp868vrcao"]
+
+[ext_resource type="Script" path="res://games/poptop/game.gd" id="1_cxesm"]
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_cxesm")

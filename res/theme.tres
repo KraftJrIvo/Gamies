@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bc8lcjrrywtn3"]
+
+[ext_resource type="FontFile" uid="uid://d13kft6s8m5eu" path="res://res/singleday.ttf" id="1_reswr"]
+
+[resource]
+default_font = ExtResource("1_reswr")
+default_font_size = 64

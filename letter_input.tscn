@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://2oerp4m31jk1"]
+
+[ext_resource type="Script" path="res://src/letter_input.gd" id="1_2pe0u"]
+[ext_resource type="Theme" uid="uid://bc8lcjrrywtn3" path="res://res/theme.tres" id="2_4fsva"]
+
+[node name="letter_input" type="VBoxContainer"]
+script = ExtResource("1_2pe0u")
+
+[node name="up" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "▲"
+
+[node name="letter" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("2_4fsva")
+text = "A"
+
+[node name="down" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "▼"
