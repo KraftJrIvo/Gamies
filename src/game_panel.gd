@@ -29,6 +29,7 @@ func resize():
 
 func _on_name_input_done():
 	$vbox/top_status.text = $vbox/name_input.get_name_() + " ready!"
+	$vbox/top_status.modulate = $vbox/name_input.get_color()
 	$vbox/top_status.visible = true
 	$vbox/name_input.visible = false
 	$vbox.alignment = 0
@@ -53,7 +54,7 @@ func process(game_time: float, delta: float):
 
 func _score_changed():
 	if not finished:
-		$vbox/top_status.text = $vbox/name_input.get_name_() + " score:" + str(game.score)
+		$vbox/top_status.text = $vbox/name_input.get_name_() + "'s score:" + str(game.score)
 
 func _game_finished():
 	if game:

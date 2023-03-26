@@ -14,6 +14,10 @@ func unfocus():
 func get_letter():
 	return alphabet[cur_idx]
 
+func set_letter(letter: String):
+	cur_idx = alphabet.find(letter)
+
 func go(off: int):
 	cur_idx = (alphabet.length() + cur_idx + off) % alphabet.length()
 	$letter.text = alphabet[cur_idx]
+	$up.button_pressed = true
