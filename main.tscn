@@ -86,6 +86,17 @@ visible = false
 layout_mode = 2
 script = ExtResource("6_44www")
 
+[node name="center" type="CenterContainer" parent="topleft/menu/game_panels"]
+layout_mode = 2
+
+[node name="panel" type="PanelContainer" parent="topleft/menu/game_panels/center"]
+layout_mode = 2
+
+[node name="notice" type="Label" parent="topleft/menu/game_panels/center/panel"]
+layout_mode = 2
+theme = ExtResource("4_hhm3g")
+text = "Someone, please, press 'Start' on your controller, or 'Enter' if you're on keboard"
+
 [connection signal="item_selected" from="topleft/menu/main_menu/game_select" to="topleft/menu" method="_on_game_select_item_selected"]
 [connection signal="pressed" from="topleft/menu/main_menu/play" to="topleft/menu" method="_on_play_pressed"]
 [connection signal="pressed" from="topleft/menu/main_menu/leaderboard" to="topleft/menu" method="_on_leaderboard_pressed"]

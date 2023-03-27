@@ -1,5 +1,8 @@
 extends Node
 
+var max_size: Vector2i
+var offset: Vector2i
+
 signal game_finished
 
 var score = 0

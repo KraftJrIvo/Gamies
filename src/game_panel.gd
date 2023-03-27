@@ -14,6 +14,7 @@ func _ready():
 	$vbox/name_input.keyboard = keyboard
 	$vbox/name_input.controller_idx = controller_idx
 	$vbox/name_input.focus()
+	$vbox/top_status.text = "Choose your name & color"
 	player_ready.connect(get_parent()._player_ready)
 	
 func get_action_suffix():
@@ -42,14 +43,18 @@ func start():
 	g.keyboard = keyboard
 	g.score_changed.connect(_score_changed)
 	g.game_finished.connect(_game_finished)
+	g.max_size = Vector2i(int(size.x), int(size.y - $vbox/top_status.size.y))
+	
+	g.player_color = $vbox/top_status.modulate
 	game = g
 	$vbox.add_child(g)
 
 func input(event: String, strength: float):
-	game.input(event, strength)
+	if game and not finished:
+		game.input(event, strength)
 
 func process(game_time: float, delta: float):
-	if game:
+	if game and not finished:
 		game.process(game_time, delta)
 
 func _score_changed():
@@ -62,6 +67,5 @@ func _game_finished():
 		var score = game.score
 		var nom = $vbox/name_input.get_name_()
 		get_parent().game_finished(nom, score)
-		var won = get_parent().all_finished
-		$vbox.remove_child(game)
-		$vbox/top_status.text = nom + " " + ("WON" if won else "LOST") + "! score: " + str(score)
+		#$vbox.remove_child(game)
+		$vbox/top_status.text = nom + " FINISHED with score: " + str(score)

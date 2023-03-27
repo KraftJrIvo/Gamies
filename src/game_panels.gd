@@ -2,6 +2,8 @@ extends HBoxContainer
 
 const GAME_PANEL = preload("res://game_panel.tscn")
 
+const START_DELAY = 0.25
+
 signal all_players_ready
 
 var kb_added = false
@@ -11,14 +13,19 @@ var all_finished = false
 
 var time = 0
 
+func _ready():
+	$center.size = get_viewport_rect().size
+
 func _reset():
 	for ch in get_children():
-		remove_child(ch)
+		if ch != $center:
+			remove_child(ch)
 	kb_added = false
 	panels = [null, null, null, null, null]
 	all_ready = false
 	all_finished = false
 	time = 0
+	$center.visible = true
 
 func _input(event):
 	if visible:
@@ -27,7 +34,7 @@ func _input(event):
 			visible = false
 			get_parent().get_node("main_menu").visible = true
 			get_parent().get_node("main_menu").get_node("game_select").grab_focus()
-		if get_children().size() == 0 or (not all_ready):
+		if get_children().size() == 1 or (not all_ready):
 			var start = false
 			var idx = -1
 			for i in range(4):
@@ -45,11 +52,13 @@ func _input(event):
 				game_panel.controller_idx = idx
 				all_players_ready.connect(game_panel.start)
 				add_child(game_panel)
+				$center.visible = false
 				panels[4 if idx == -1 else idx] = game_panel
 				for g in get_children():
-					g.resize()
+					if g != $center:
+						g.resize()
 		else:
-			if time > 1:
+			if time > START_DELAY:
 				var strength = 0
 				for action in InputMap.get_actions():
 					if InputMap.event_is_action(event, action):
@@ -69,13 +78,14 @@ func _input(event):
 
 func _player_ready():
 	var chs = get_children()
-	if chs.size() == 0:
+	if chs.size() == 1:
 		return false
 	var all = true
 	for ch in chs:
-		if not ch.player_ready_:
-			all = false
-			break
+		if ch != $center:
+			if not ch.player_ready_:
+				all = false
+				break
 	if all:
 		all_ready = true
 		all_players_ready.emit()
@@ -84,13 +94,14 @@ func _process(delta):
 	if all_ready:
 		time += delta
 	for ch in get_children():
-		ch.process(time, delta)
+		if ch != $center:
+			ch.process(time, delta)
 
 func game_finished(nom: String, score: int):
 	get_parent().get_node("leaderboard").add_result_and_save(nom, score)
 	var all = true
 	for ch in get_children():
-		if not ch.finished:
-			all = false
-			break
+		if ch != $center:
+			
+				break
 	all_finished = all	

@@ -14,7 +14,6 @@ size_flags_horizontal = 4
 alignment = 1
 
 [node name="top_status" type="Label" parent="vbox"]
-visible = false
 layout_mode = 2
 theme = ExtResource("2_caws8")
 horizontal_alignment = 1

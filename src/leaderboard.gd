@@ -34,7 +34,7 @@ func _try_to_load():
 
 func _init_():
 	for i in range(length):
-		add_result(DEF_NAME, DEF_SCOR)
+		add_result(DEF_NAME, DEF_SCOR, true)
 	_save()
 
 func _load():
@@ -45,7 +45,7 @@ func _load():
 		var splt = line.split(FILE_SEP)
 		var nom = splt[0]
 		var score = int(splt[1])
-		add_result(nom, score)
+		add_result(nom, score, true)
 
 func _update_lines():
 	for child in names.get_children():
@@ -87,7 +87,9 @@ func _trim():
 	while results.size() > length:
 		results.pop_back()
 
-func add_result(nom: String, score: int):
+func add_result(nom: String, score: int, noload = false):
+	if results.size() == 0 and not noload:
+		_try_to_load()
 	for r in results:
 		if r[0] == nom and r[1] == score and r[0] != DEF_NAME and r[1] != DEF_SCOR:
 			return

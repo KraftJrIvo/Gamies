@@ -2,5 +2,11 @@
 
 [ext_resource type="Script" path="res://games/snake/game.gd" id="1_wyf6i"]
 
-[node name="game" type="Node2D"]
+[node name="game" type="PanelContainer"]
 script = ExtResource("1_wyf6i")
+
+[node name="bg" type="Polygon2D" parent="."]
+color = Color(0.980392, 0.960784, 0.858824, 1)
+polygon = PackedVector2Array(0, 0, 1, 0, 1, 1, 0, 1)
+
+[node name="sprites" type="Node2D" parent="."]

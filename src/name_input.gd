@@ -3,6 +3,7 @@ extends HBoxContainer
 
 signal done
 
+const THEME4OK = preload("res://res/theme_smaller.tres")
 const LETTER = preload("res://letter_input.tscn")
 const COLOR = preload("res://color_input.tscn")
 
@@ -48,6 +49,7 @@ func _ready():
 	add_child(COLOR.instantiate())
 	var b = Button.new()
 	b.text = "ok"
+	b.theme = THEME4OK
 	add_child(b)
 	
 func _get_action_suffix():
@@ -56,6 +58,8 @@ func _get_action_suffix():
 	return str(controller_idx)
 
 func focus():
+	if not focused:
+		_try_to_load(-1 if keyboard else controller_idx)
 	focused = true
 	var chs = get_children()
 	for ch in chs:
@@ -68,7 +72,6 @@ func focus():
 			chs[focus_idx].focus()
 		else:
 			chs[focus_idx]["theme_override_styles/normal"] = ThemeDB.fallback_stylebox.duplicate()
-	_try_to_load(-1 if keyboard else controller_idx)
 
 func unfocus():
 	focused = false
