@@ -94,7 +94,7 @@ layout_mode = 2
 
 [node name="notice" type="Label" parent="topleft/menu/game_panels/center/panel"]
 layout_mode = 2
-theme = ExtResource("4_hhm3g")
+theme = ExtResource("4_nu8og")
 text = "Someone, please, press 'Start' on your controller, or 'Enter' if you're on keboard"
 
 [connection signal="item_selected" from="topleft/menu/main_menu/game_select" to="topleft/menu" method="_on_game_select_item_selected"]

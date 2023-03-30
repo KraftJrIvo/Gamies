@@ -23,7 +23,7 @@ func get_action_suffix():
 	return "_" + str(controller_idx)
 
 func resize():
-	var w = get_viewport_rect().size.x / get_parent().get_children().size()
+	var w = get_viewport_rect().size.x / (get_parent().get_children().size() - 1)
 	var h = get_viewport_rect().size.y
 	$vbox.custom_minimum_size.x = w
 	$vbox.custom_minimum_size.y = h
@@ -43,8 +43,7 @@ func start():
 	g.keyboard = keyboard
 	g.score_changed.connect(_score_changed)
 	g.game_finished.connect(_game_finished)
-	g.max_size = Vector2i(int(size.x), int(size.y - $vbox/top_status.size.y))
-	
+	g.max_size = Vector2i(int(size.x), int(size.y - $vbox/top_status.size.y))	
 	g.player_color = $vbox/top_status.modulate
 	game = g
 	$vbox.add_child(g)

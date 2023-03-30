@@ -2,5 +2,11 @@
 
 [ext_resource type="Script" path="res://games/tetris/game.gd" id="1_vqwvc"]
 
-[node name="game" type="Node2D"]
+[node name="game" type="PanelContainer"]
 script = ExtResource("1_vqwvc")
+
+[node name="bg" type="Polygon2D" parent="."]
+color = Color(0.980392, 0.960784, 0.858824, 1)
+polygon = PackedVector2Array(0, 0, 0.5, 0, 0.5, 1, 0, 1)
+
+[node name="sprites" type="Node2D" parent="."]

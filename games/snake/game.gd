@@ -62,7 +62,10 @@ func _ready():
 	#$canvas.size = max_size
 	field_side = min(max_size.x, max_size.y)
 	$bg.scale = Vector2.ONE * field_side
-	$bg.position.x += (max_size.x - field_side) / 2
+	$bg.position += (Vector2(max_size
+	
+	
+	) - Vector2.ONE * field_side) / 2
 	$sprites.position = $bg.position
 	sync_snake_sprites()
 	sync_food_sprites()
@@ -105,7 +108,6 @@ func sync_snake_sprites():
 		sprites.push_back(s)
 	var cell_sz = float(field_side) / float(field_size)
 	for i in range(parts.size()):
-		
 		sprites[i].position = (Vector2(parts[i].x, parts[i].y) + Vector2.ONE * 0.5) * cell_sz
 		sprites[i].scale = Vector2.ONE * cell_sz / 512
 		sprites[i].rotation = 0
